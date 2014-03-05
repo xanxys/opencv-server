@@ -1,0 +1,4 @@
+gen-cpp/
+opencv_server
+*.o
+*.sconsign.dblite
