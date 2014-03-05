@@ -6,17 +6,28 @@ env = Environment(
 	CCFLAGS = ['-O3', '-g'],
 	CPPPATH = [
 		'/usr/include/eigen3',
-		'/usr/include/pcl-1.6',
-		'/usr/include/ni',
 	],
 	LIBPATH = [
 	])
 env['ENV']['TERM'] = os.environ['TERM']
 
 # project specific code
-env.Program(
+proto = env.Command([
+	'gen-cpp/CalibrationServer.cpp',
+	'gen-cpp/calibration_constants.cpp',
+	'gen-cpp/calibration_types.cpp',
+	],
+	'calibration.thrift',
+	'thrift --gen cpp $SOURCE')
+
+prog = env.Program(
 	'opencv_server',
-	source = Glob('*.cpp') + Glob('*/*.cpp'),
+	source = [
+		'server.cpp',
+		'gen-cpp/CalibrationServer.cpp',
+		'gen-cpp/calibration_constants.cpp',
+		'gen-cpp/calibration_types.cpp',
+		],
 	LIBS = [
 		'libboost_system-mt',
 		'libboost_thread-mt',
@@ -28,3 +39,6 @@ env.Program(
 		'libpthread',
 		'libthrift',
 		])
+
+env.Clean(proto, Dir('gen-cpp'))
+env.Depends(prog, proto)
