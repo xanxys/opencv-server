@@ -65,7 +65,7 @@ struct Image {
 
 service CalibrationServer {
 	// Find rows * cols corners of chessboard image and return (if successful) them in
-	// [row1, row2, row2, ...] order.
+	// [row1, row2, row3, ...] order.
 	DetectionResult findChessboardCorners(
 		1: Image image,
 		2: i16 rows,

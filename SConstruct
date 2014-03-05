@@ -24,6 +24,7 @@ env.Program(
 		'libopencv_core',
 		'libopencv_highgui',
 		'libopencv_imgproc',
+		'libopencv_calib3d',
 		'libpthread',
 		'libthrift',
 		])
