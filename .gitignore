@@ -1,4 +1,5 @@
 gen-cpp/
+gen-py/
 opencv_server
 *.o
 *.sconsign.dblite

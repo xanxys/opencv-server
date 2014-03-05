@@ -20,6 +20,8 @@ proto = env.Command([
 	'calibration.thrift',
 	'thrift --gen cpp $SOURCE')
 
+env.Command(Dir('gen-py'), 'calibration.thrift', 'thrift --gen py $SOURCE')
+
 prog = env.Program(
 	'opencv_server',
 	source = [
